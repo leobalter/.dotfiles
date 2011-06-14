@@ -1,6 +1,6 @@
 [user]
-  name = Adam Vandenberg
-  email = flangy@gmail.com
+  name = Leonardo Balter
+  email = leonardo.balter@gmail.com
 
 [color]
   ui = auto
@@ -30,7 +30,7 @@
   excludesfile = ~/.gitignore
 
 [github]
-  user = adamv
+  user = leobalter
   token = !security 2>&1 >/dev/null find-generic-password -gs github.token | ruby -e 'print $1 if STDIN.gets =~ /^password: \\\"(.*)\\\"$/'
 
 [git-tmbundle]
