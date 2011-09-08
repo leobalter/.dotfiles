@@ -55,6 +55,7 @@ alias lm='ls -la | less'
 ## Aliases
 alias cls='clear'
 alias edit='mate'
+alias mate='open -a "Sublime Text 2"'
 alias delpyc="find . -name '*.pyc' -delete"
 alias tree='tree -Ca -I ".git|.svn|*.pyc|*.swp"'
 alias sizes='du -h -d1'
