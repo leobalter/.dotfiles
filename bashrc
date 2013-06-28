@@ -1,9 +1,10 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+source /Users/leobalter/perl5/perlbrew/etc/bashrc
 
-export EDITOR='mate'
-export GIT_EDITOR='mate -wl1'
+# export EDITOR='mate'
+# export GIT_EDITOR='mate -wl1'
 
 
 ## History control
@@ -13,7 +14,7 @@ shopt -s histappend
 
 ## PATH
 # Put /usr/local/{sbin,bin} first
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+export PATH=/usr/local/share/npm/bin:/usr/local/bin:/usr/local/sbin:$PATH
 
 # bin folders from ~, gems, and Homebrew
 for another_bin in \
@@ -60,9 +61,6 @@ alias delpyc="find . -name '*.pyc' -delete"
 alias tree='tree -Ca -I ".git|.svn|*.pyc|*.swp"'
 alias sizes='du -h -d1'
 
-alias go-bundles="cd ~/Library/Application\ Support/TextMate/Bundles/"
-alias go-themes="cd ~/Library/Application\ Support/TextMate/Themes/"
-
 alias firefox-dev="~/Applications/Minefield.app/Contents/MacOS/firefox-bin -no-remote -P dev &"
 
 alias flushdns="dscacheutil -flushcache"
@@ -91,22 +89,13 @@ set completion-ignore-case On
 for comp in \
     /usr/local/etc/bash_completion \
     /usr/local/etc/bash_completion.d/git-completion.bash \
-    ~/homebrew/Library/Contributions/brew_bash_completion.sh \
-    ~/source/custom-django/extras/django_bash_completion
+    ~/homebrew/Library/Contributions/brew_bash_completion.sh 
 do
     [[ -e $comp ]] && source $comp
 done
 
 source ~/.dotfiles/completion_scripts/fab_completion.bash
 source ~/.dotfiles/completion_scripts/pip_completion.bash
-
-
-## Python stuff
-export VIRTUALENV_USE_DISTRIBUTE
-export WORKON_HOME=$HOME/env
-
-export SCALA_HOME=$(brew --prefix scala)/libexec
-export PATH=$SCALA_HOME:$PATH
 
 ## Custom prompt
 # Colors
