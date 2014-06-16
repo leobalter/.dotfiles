@@ -246,3 +246,5 @@ function pgrep {
   local exclude="\.svn|\.git|\.swp|\.coverage|\.pyc|_build"
   find . -maxdepth 1 -mindepth 1 | egrep -v "$exclude" | xargs egrep -lir "$1" | egrep -v "$exclude" | xargs egrep -Hin --color "$1"
 }
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
