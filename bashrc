@@ -6,6 +6,10 @@ source /Users/leobalter/perl5/perlbrew/etc/bashrc
 # export EDITOR='mate'
 # export GIT_EDITOR='mate -wl1'
 
+# use browserstack_key file to set your browserstack credentials
+if [ -f ~/.browserstack_key ]; then
+  . ~/.browserstack_key
+fi
 
 ## History control
 export HISTCONTROL=ignoreboth
