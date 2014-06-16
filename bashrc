@@ -48,37 +48,15 @@ fi
 # No ._ files in archives please
 export COPYFILE_DISABLE=true
 
-
-#  ls aliases
-alias ll="ls -l -h"
-alias la="ls -a"
-alias l="ls"
-alias lla="ls -a -l"
-alias lm='ls -la | less'
-
-
 ## Aliases
 alias cls='clear'
-alias edit='mate'
-alias mate='open -a "Sublime Text"'
+alias edit='open -a "Sublime Text"'
 alias delpyc="find . -name '*.pyc' -delete"
 alias tree='tree -Ca -I ".git|.svn|*.pyc|*.swp"'
 alias sizes='du -h -d1'
 alias hljs='pbpaste | highlight --syntax=js -O rtf | pbcopy'
 
-alias firefox-dev="~/Applications/Minefield.app/Contents/MacOS/firefox-bin -no-remote -P dev &"
-
 alias flushdns="dscacheutil -flushcache"
-
-alias pigs="du | sort -nr | cut -f2- | xargs du -hs"
-alias pigs1="du -d1 | sort -nr | cut -f2- | xargs du -hs"
-
-alias gh="gh-pick"
-
-
-alias fhome="figit on -x 1600 -y 1000"
-alias fwork="figit off"
-
 
 function show-empty-folders {
     find . -depth -type d -empty
