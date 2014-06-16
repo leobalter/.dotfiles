@@ -16,7 +16,6 @@
   lg   = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
 	lgp  = log -p
   msg  = commit --allow-empty -m
-  p    = !gh-pick
   pick = cherry-pick -s
   remaster = rebase master
   rei  = rebase -i master
@@ -36,9 +35,6 @@
 [github]
   user = leobalter
   token = !security 2>&1 >/dev/null find-generic-password -gs github.token | ruby -e 'print $1 if STDIN.gets =~ /^password: \\\"(.*)\\\"$/'
-
-[git-tmbundle]
-  gitx-path = /usr/local/bin/gitx
 
 [pretty]
   nice = "%C(magenta)%h %C(yellow)%ad %C(white)| %C(green)%s%C(red)%d %C(yellow)[%an]"
