@@ -56,10 +56,11 @@ alias lm='ls -la | less'
 ## Aliases
 alias cls='clear'
 alias edit='mate'
-alias mate='open -a "Sublime Text 2"'
+alias mate='open -a "Sublime Text"'
 alias delpyc="find . -name '*.pyc' -delete"
 alias tree='tree -Ca -I ".git|.svn|*.pyc|*.swp"'
 alias sizes='du -h -d1'
+alias hljs='pbpaste | highlight --syntax=js -O rtf | pbcopy'
 
 alias firefox-dev="~/Applications/Minefield.app/Contents/MacOS/firefox-bin -no-remote -P dev &"
 
