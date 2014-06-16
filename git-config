@@ -24,6 +24,8 @@
 	st   = status
   top  = git rev-parse HEAD
   wip  = commit -a -m 'wip'
+  nicelog = log --pretty=nice --graph --date-order --date=short --max-count=15
+
 
 [push]
   default = current
@@ -37,3 +39,6 @@
 
 [git-tmbundle]
   gitx-path = /usr/local/bin/gitx
+
+[pretty]
+  nice = "%C(magenta)%h %C(yellow)%ad %C(white)| %C(green)%s%C(red)%d %C(yellow)[%an]"
