@@ -51,6 +51,8 @@ export COPYFILE_DISABLE=true
 ## Aliases
 alias cls='clear'
 alias edit='open -a "Sublime Text"'
+alias atom='open -a "Atom"'
+alias brackets='open -a "Brackets"'
 alias delpyc="find . -name '*.pyc' -delete"
 alias tree='tree -Ca -I ".git|.svn|*.pyc|*.swp"'
 alias sizes='du -h -d1'
