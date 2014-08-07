@@ -20,17 +20,14 @@ curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
 # installs pathogen vim bundles
 cd ~/.vim/bundle
-# Ref: http://vimawesome.com/plugin/vim-javascript
+# Refs: http://vimawesome.com
 git clone https://github.com/pangloss/vim-javascript.git
-# Ref: http://vimawesome.com/plugin/syntastic
 git clone https://github.com/scrooloose/syntastic.git
-# Ref: http://vimawesome.com/plugin/fugitive-vim
 git clone git://github.com/tpope/vim-fugitive.git
 vim -u NONE -c "helptags vim-fugitive/doc" -c q
-# Ref: http://vimawesome.com/plugin/vim-gitgutter
 git clone git://github.com/airblade/vim-gitgutter.git
-# Ref: http://vimawesome.com/plugin/emmet-vim
 git clone https://github.com/mattn/emmet-vim.git
+git clone https://github.com/scrooloose/nerdtree.git
 
 curl -LSso ~/.vim/colors/lucario.vim https://raw.githubusercontent.com/raphamorim/lucario/master/vim/colors/lucario.vim
 
