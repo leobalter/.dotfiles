@@ -4,7 +4,7 @@
 
 [color]
   ui = auto
-	diff = auto
+  diff = auto
 
 [alias]
   a    = commit --amend
@@ -14,13 +14,13 @@
   dh   = diff HEAD^
   dm   = diff master
   lg   = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
-	lgp  = log -p
+  lgp  = log -p
   msg  = commit --allow-empty -m
   pick = cherry-pick -s
   remaster = rebase master
   rei  = rebase -i master
   sb   = status -sb
-	st   = status
+  st   = status
   top  = git rev-parse HEAD
   wip  = commit -a -m 'wip'
   nicelog = log --pretty=nice --graph --date-order --date=short --max-count=15
@@ -31,6 +31,7 @@
 
 [core]
   excludesfile = ~/.gitignore
+  editor = /usr/local/bin/vim
 
 [github]
   user = leobalter
