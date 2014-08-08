@@ -17,3 +17,11 @@ Other tools:
 ```bash
 brew install lynx wget zsh ack phantomjs hub tree highlight
 ```
+
+After cloning this repo, remember to run install to set dotfiles links and install vim packages:
+
+```bash
+# assuming you the the clone to ~/.dotfiles
+cd .dotfiles
+sh install
+```
