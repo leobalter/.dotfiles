@@ -82,6 +82,9 @@ done
 source ~/.dotfiles/completion_scripts/fab_completion.bash
 source ~/.dotfiles/completion_scripts/pip_completion.bash
 
+## Tab Completions for grunt-cli
+eval "$(grunt --completion=bash)"
+
 ## Custom prompt
 # Colors
        RED="\[\033[0;31m\]"
