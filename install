@@ -36,7 +36,6 @@ curl -LSso ~/.vim/colors/lucario.vim https://raw.githubusercontent.com/raphamori
 
 cd ~
 relink .bash_profile ~/.dotfiles/bash_profile
-relink .browserstack_key ~/.dotfiles/browserstack_key
 relink .bashrc ~/.dotfiles/bashrc
 relink .gitconfig ~/.dotfiles/git-config
 relink .gitignore ~/.dotfiles/git-ignore-global
