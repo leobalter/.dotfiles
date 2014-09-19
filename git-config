@@ -13,6 +13,7 @@
   ca   = commit -a
   dh   = diff HEAD^
   dm   = diff master
+  ff   = merge --ff-only
   lg   = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
   lgp  = log -p
   msg  = commit --allow-empty -m
