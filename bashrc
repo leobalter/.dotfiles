@@ -55,6 +55,7 @@ alias delpyc="find . -name '*.pyc' -delete"
 alias tree='tree -Ca -I ".git|.svn|*.pyc|*.swp|node_modules"'
 alias sizes='du -h -d1'
 alias hljs='pbpaste | highlight --syntax=js -O rtf | pbcopy'
+alias today="cal | grep -C6 --color \"$(date +%e)\""
 
 alias flushdns="dscacheutil -flushcache"
 
@@ -72,7 +73,7 @@ set completion-ignore-case On
 for comp in \
     /usr/local/etc/bash_completion \
     /usr/local/etc/bash_completion.d/git-completion.bash \
-    ~/homebrew/Library/Contributions/brew_bash_completion.sh 
+    ~/homebrew/Library/Contributions/brew_bash_completion.sh
 do
     [[ -e $comp ]] && source $comp
 done
