@@ -1,8 +1,6 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-source /Users/leobalter/perl5/perlbrew/etc/bashrc
-
 # export EDITOR='mate'
 # export GIT_EDITOR='mate -wl1'
 
