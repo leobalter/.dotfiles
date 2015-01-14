@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Install homebrew
+ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+
+# install git > 2.0.0, node > 0.10, vim > 7.4
+brew install git node vim
+
+# Other tools:
+brew install lynx wget zsh ack phantomjs hub tree highlight
+
+# Ansible
+brew install ansible
+
+#######
+
+# Cask - http://caskroom.io/
+brew install caskroom/cask/brew-cask
+
+# After cask...
+
+# Vagrant
+brew cask install virtualbox
+brew cask install vagrant
+vagrant plugin install vagrant-exec
+
