@@ -13,10 +13,13 @@ fi
 export HISTCONTROL=ignoreboth
 shopt -s histappend
 
-
 ## PATH
 # Put /usr/local/{sbin,bin} first
 export PATH=/usr/local/share/npm/bin:/usr/local/bin:/usr/local/sbin:$PATH
+
+## NVM
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
 
 # bin folders from ~, gems, and Homebrew
 for another_bin in \
