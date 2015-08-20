@@ -40,3 +40,7 @@
 
 [pretty]
   nice = "%C(magenta)%h %C(yellow)%ad %C(white)| %C(green)%s%C(red)%d %C(yellow)[%an]"
+[filter "lfs"]
+	clean = git lfs clean %f
+	smudge = git lfs smudge %f
+	required = true
