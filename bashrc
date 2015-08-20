@@ -1,9 +1,6 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# export EDITOR='mate'
-# export GIT_EDITOR='mate -wl1'
-
 # use browserstack_key file to set your browserstack credentials
 if [ -f ~/.browserstack_key ]; then
   . ~/.browserstack_key
@@ -16,17 +13,26 @@ shopt -s histappend
 ## PATH
 # Put /usr/local/{sbin,bin} first
 export PATH=/usr/local/share/npm/bin:/usr/local/bin:/usr/local/sbin:$PATH
+export PATH=/Users/leobalter/dev/tc39/depot_tools:$PATH
+export PATH=/Users/leobalter/dev/tc39/test262-v8-machinery/v8-git-mirror/out/native:$PATH
+# export PATH=/Users/leobalter/dev/tc39/gecko-dev/js/src/build_OPT.OBJ/dist/bin:$PATH
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 ## NVM
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
 
+## Java SDK
+export JAVA_HOME=$(/usr/libexec/java_home)
+
+## Test262 Path
+export TEST262_PATH=/Users/leobalter/dev/tc39/test262-v8-machinery/test262
+
 # bin folders from ~, gems, and Homebrew
 for another_bin in \
     $HOME/bin \
-    $HOME/bin/extras \
-    $HOME/.gem/ruby/1.8/bin \
-    "/Library/Application\ Support/VMware\ Fusion"
+    $HOME/bin/extras
 do
     [[ -e $another_bin ]] && export PATH=$another_bin:$PATH
 done
@@ -44,7 +50,6 @@ if [[ -n `which brew` ]]; then
   ruby_bin=`echo $ruby_bin`
   [[ -e $ruby_bin ]] && export PATH=$ruby_bin:$PATH
 fi
-
 
 # No ._ files in archives please
 export COPYFILE_DISABLE=true
@@ -76,13 +81,17 @@ set completion-ignore-case On
 for comp in \
     /usr/local/etc/bash_completion \
     /usr/local/etc/bash_completion.d/git-completion.bash \
-    ~/homebrew/Library/Contributions/brew_bash_completion.sh
+    /usr/local/Cellar/node/0.12.7/etc/bash_completion.d/npm \
+    /usr/local/Cellar/nvm/0.23.3/etc/bash_completion.d/nvm
 do
     [[ -e $comp ]] && source $comp
 done
 
 ## Tab Completions for grunt-cli
 eval "$(grunt --completion=bash)"
+
+## Alias hub to git
+eval "$(hub alias -s)"
 
 ## Custom prompt
 # Colors
@@ -140,7 +149,7 @@ function parse_git_branch {
     }
 
     [[ ${git_status} =~ "Untracked files" ]] && {
-      git_is_dirty="${git_is_dirty}${WHITE}${MIDDOT}"
+      git_is_dirty="${git_is_dirty}${PINK}${MIDDOT}"
     }
 
     [[ ${git_status} =~ "new file:" ]] && {
@@ -148,7 +157,7 @@ function parse_git_branch {
     }
 
     [[ ${git_status} =~ "deleted:" ]] && {
-      git_is_dirty="${git_is_dirty}${RED}-"
+      git_is_dirty="${git_is_dirty}${RED}${RECYCLE}"
     }
 
     [[ ${git_status} =~ "renamed:" ]] && {
@@ -188,7 +197,7 @@ function set_prompt {
 
   # Domain is stripped from hostname
   case $HOSTNAME in
-    adamv-desktop.local|Flangymobile08.local)
+    LeoBalter-Bocoup.local)
       this_host=
       ;;
     *)
@@ -200,23 +209,10 @@ function set_prompt {
 }
 export PROMPT_COMMAND=set_prompt
 
-
 function git-root {
   root=$(git rev-parse --git-dir 2> /dev/null)
   [[ -z "$root" ]] && root="."
   dirname $root
-}
-
-
-# Reveal current or provided folder in Path Finder
-function pf {
-  target_path="$(cd ${1:-"$PWD"} && PWD)"
-  osascript<<END
-tell app "Path Finder"
-  reveal POSIX file("$target_path")
-  activate
-end tell
-END
 }
 
 # Open a manpage in Preview, which can be saved to PDF
@@ -234,4 +230,3 @@ function pgrep {
   find . -maxdepth 1 -mindepth 1 | egrep -v "$exclude" | xargs egrep -lir "$1" | egrep -v "$exclude" | xargs egrep -Hin --color "$1"
 }
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
