@@ -16,6 +16,12 @@ shopt -s histappend
 ## PATH
 # Put /usr/local/{sbin,bin} first
 export PATH=/usr/local/share/npm/bin:/usr/local/bin:/usr/local/sbin:$PATH
+export PATH=/Users/leobalter/dev/depot_tools:$PATH
+
+export MOZILLA_PATH=/Users/leobalter/dev/gecko-dev/js/src/build_DBG.OBJ/dist/bin
+export V8_PATH=/Users/leobalter/dev/v8/out/native
+export TEST262_PATH=/Users/leobalter/dev/test262
+export JAVA_HOME=$(/usr/libexec/java_home)
 
 ## NVM
 export NVM_DIR=~/.nvm
@@ -61,6 +67,8 @@ alias hljs='pbpaste | highlight --syntax=js -O rtf | pbcopy'
 alias today="cal | grep -C6 --color \"$(date +%e)\""
 
 alias flushdns="dscacheutil -flushcache"
+alias js-dev='~/dev/gecko-dev/js/src/build_DBG.OBJ/dist/bin/js'
+alias d8='~/dev/v8/out/native/d8'
 
 function show-empty-folders {
     find . -depth -type d -empty
