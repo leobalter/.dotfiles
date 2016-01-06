@@ -71,7 +71,7 @@ alias flushdns="dscacheutil -flushcache"
 alias js-dev='~/dev/spidermonkey/js/src/build_DBG.OBJ/dist/bin/js'
 alias d8='~/dev/v8/out/native/d8'
 alias test262-spidermonkey='bash ~/.dotfiles/bin/run-tests.sh ../spidermonkey/js/src/build_DBG.OBJ/dist/bin/js'
-alias test262-d8='bash ~/.dotfiles/bin/run-tests.sh'
+alias test262-d8='bash ~/.dotfiles/bin/run-tests.sh /Users/leobalter/dev/v8/out/native/d8'
 
 function show-empty-folders {
     find . -depth -type d -empty

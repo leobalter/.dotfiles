@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 RUNNER=tools/packaging/test262.py
-LOCAL_V8=/usr/local/bin/d8
+LOCAL_V8=/Users/leobalter/dev/v8/out/native/d8
 
 function help() {
   cat <<HELP
