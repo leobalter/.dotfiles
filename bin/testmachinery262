@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 current_dir=$(pwd)
 
-cd ~/dev/test262-v8-machinery
+cd ~/dev/tc39/test262-v8-machinery
 
 if [ $1 == 'js6' ]
 then

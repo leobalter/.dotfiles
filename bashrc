@@ -68,8 +68,10 @@ alias hljs='pbpaste | highlight --syntax=js -O rtf | pbcopy'
 alias today="cal | grep -C6 --color \"$(date +%e)\""
 
 alias flushdns="dscacheutil -flushcache"
-alias js-dev='~/dev/gecko-dev/js/src/build_DBG.OBJ/dist/bin/js'
+alias js-dev='~/dev/spidermonkey/js/src/build_DBG.OBJ/dist/bin/js'
 alias d8='~/dev/v8/out/native/d8'
+alias test262-spidermonkey='bash ../run-tests.sh ../spidermonkey/js/src/build_DBG.OBJ/dist/bin/js'
+alias test262-d8='bash ../run-tests.sh'
 
 function show-empty-folders {
     find . -depth -type d -empty
