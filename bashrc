@@ -15,7 +15,7 @@ shopt -s histappend
 export PATH=/usr/local/share/npm/bin:/usr/local/bin:/usr/local/sbin:$PATH
 export PATH=/Users/leobalter/dev/depot_tools:$PATH
 
-export MOZILLA_PATH=/Users/leobalter/dev/gecko-dev/js/src/build_DBG.OBJ/dist/bin
+export MOZILLA_PATH=/Users/leobalter/dev/gecko-dev/js/src/build_OPT.OBJ/dist/bin
 export V8_PATH=/Users/leobalter/dev/v8/out/native
 
 # Add RVM to PATH for scripting
@@ -66,12 +66,15 @@ alias tree='tree -Ca -I ".git|.svn|*.pyc|*.swp|node_modules"'
 alias sizes='du -h -d1'
 alias hljs='pbpaste | highlight --syntax=js -O rtf | pbcopy'
 alias today="cal | grep -C6 --color \"$(date +%e)\""
+alias connect-irc="ssh -i irssi.pem leobalter@54.89.155.61"
 
 alias flushdns="dscacheutil -flushcache"
 alias js-dev='~/dev/spidermonkey/js/src/build_DBG.OBJ/dist/bin/js'
 alias d8='~/dev/v8/out/native/d8'
 alias test262-spidermonkey='bash ~/.dotfiles/bin/run-tests.sh ../spidermonkey/js/src/build_DBG.OBJ/dist/bin/js'
 alias test262-d8='bash ~/.dotfiles/bin/run-tests.sh /Users/leobalter/dev/v8/out/native/d8'
+alias test262-spidermonkey-folder='./tools/packaging/test262.py --command="/Users/leobalter/dev/spidermonkey/js/src/build_DBG.OBJ/dist/bin/js"'
+alias test262-d8-folder='./tools/packaging/test262.py --command="/Users/leobalter/dev/v8/out/native/d8"'
 
 function show-empty-folders {
     find . -depth -type d -empty
@@ -236,3 +239,6 @@ function pgrep {
   find . -maxdepth 1 -mindepth 1 | egrep -v "$exclude" | xargs egrep -lir "$1" | egrep -v "$exclude" | xargs egrep -Hin --color "$1"
 }
 
+
+# added by travis gem
+[ -f /Users/leobalter/.travis/travis.sh ] && source /Users/leobalter/.travis/travis.sh
