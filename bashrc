@@ -21,10 +21,12 @@ shopt -s histappend
 ## PATH
 # Put /usr/local/{sbin,bin} first
 export PATH=/usr/local/share/npm/bin:/usr/local/bin:/usr/local/sbin:$PATH
-export PATH=/Users/leobalter/dev/depot_tools:$PATH
+export PATH=/Users/$USER/dev/depot_tools:$PATH
 
-export MOZILLA_PATH=/Users/leobalter/dev/gecko-dev/js/src/build_OPT.OBJ/dist/bin
-export V8_PATH=/Users/leobalter/dev/v8/out/native
+export MOZILLA_PATH=/Users/$USER/dev/gecko-dev/js/src/build_OPT.OBJ/dist/bin
+export V8_PATH=/Users/$USER/dev/v8/out/native
+
+export PATH=$V8_PATH:$MOZILLA_PATH:$PATH
 
 # Add RVM to PATH for scripting
 PATH=$PATH:$HOME/.rvm/bin
@@ -37,7 +39,7 @@ source $(brew --prefix nvm)/nvm.sh
 export JAVA_HOME=$(/usr/libexec/java_home)
 
 ## Test262 Path
-export TEST262_PATH=/Users/leobalter/dev/test262
+export TEST262_PATH=/Users/$USER/dev/test262
 
 # bin folders from ~, gems, and Homebrew
 for another_bin in \
@@ -77,12 +79,10 @@ alias today="cal | grep -C6 --color \"$(date +%e)\""
 alias connect-irc="ssh -i irssi.pem leobalter@54.89.155.61"
 
 alias flushdns="dscacheutil -flushcache"
-alias js-dev='~/dev/spidermonkey/js/src/build_DBG.OBJ/dist/bin/js'
-alias d8='~/dev/v8/out/native/d8'
-alias test262-spidermonkey='bash ~/.dotfiles/bin/run-tests.sh ../spidermonkey/js/src/build_DBG.OBJ/dist/bin/js'
-alias test262-d8='bash ~/.dotfiles/bin/run-tests.sh /Users/leobalter/dev/v8/out/native/d8'
-alias test262-spidermonkey-folder='./tools/packaging/test262.py --command="/Users/leobalter/dev/spidermonkey/js/src/build_DBG.OBJ/dist/bin/js"'
-alias test262-d8-folder='./tools/packaging/test262.py --command="/Users/leobalter/dev/v8/out/native/d8"'
+alias js-dev='$MOZILLA_PATH/js'
+alias d8='$V8_PATH/d8'
+alias test262-spidermonkey='bash ~/.dotfiles/bin/run-tests.sh $MOZILLA_PATH/js'
+alias test262-d8='bash ~/.dotfiles/bin/run-tests.sh $V8_PATH/d8'
 
 function show-empty-folders {
     find . -depth -type d -empty
