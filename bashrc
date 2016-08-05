@@ -79,7 +79,7 @@ alias hljs='pbpaste | highlight --syntax=js -O rtf | pbcopy'
 alias today="cal | grep -C6 --color \"$(date +%e)\""
 alias connect-irc="ssh -i irssi.pem leobalter@54.89.155.61"
 
-alias flushdns="dscacheutil -flushcache"
+alias flushdns='dscacheutil -flushcache'
 alias js-dev='$MOZILLA_PATH/js'
 alias d8='$V8_PATH/d8'
 alias test262-spidermonkey='bash ~/.dotfiles/bin/run-tests.sh $MOZILLA_PATH/js'
