@@ -106,7 +106,7 @@ do
 done
 
 ## Tab Completions for grunt-cli
-eval "$(grunt --completion=bash)"
+# eval "$(grunt --completion=bash)"
 
 ## Alias hub to git
 eval "$(hub alias -s)"
