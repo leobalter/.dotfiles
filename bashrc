@@ -70,6 +70,7 @@ export COPYFILE_DISABLE=true
 alias cls='clear'
 alias edit='open -a "Sublime Text"'
 alias atom='open -a "Atom"'
+alias code='open -a "Visual Studio Code"'
 alias brackets='open -a "Brackets"'
 alias delpyc="find . -name '*.pyc' -delete"
 alias tree='tree -Ca -I ".git|.svn|*.pyc|*.swp|node_modules"'
