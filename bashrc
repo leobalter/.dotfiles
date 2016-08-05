@@ -32,8 +32,8 @@ export PATH=$V8_PATH:$MOZILLA_PATH:$PATH
 PATH=$PATH:$HOME/.rvm/bin
 
 ## NVM
-export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
+export NVM_DIR="$HOME/.nvm"
+. "$(brew --prefix nvm)/nvm.sh"
 
 ## Java SDK
 export JAVA_HOME=$(/usr/libexec/java_home)
