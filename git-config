@@ -1,7 +1,8 @@
 [user]
   name = Leonardo Balter
   email = leonardo.balter@gmail.com
-  signingkey = 59133F60
+  #signingkey = 59133F60
+  signingkey = 4191D7EB5EC82FF7
 
 [color]
   ui = auto
@@ -48,7 +49,7 @@
   smudge = git lfs smudge %f
   required = true
 [commit]
-  # gpgsign = true
+  gpgsign = true
 [gpg]
   program = gpg2
   gpgsign = true
