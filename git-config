@@ -1,7 +1,7 @@
 [user]
   name = Leonardo Balter
   email = leonardo.balter@gmail.com
-  signingkey = 59133F60
+	signingkey = 3151533059133F60
 
 [color]
   ui = auto
@@ -50,6 +50,6 @@
 [commit]
   # gpgsign = true
 [gpg]
-  program = gpg2
+	program = /usr/local/bin/gpg
   gpgsign = true
 

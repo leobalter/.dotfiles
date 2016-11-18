@@ -10,10 +10,11 @@ fi
 if test -f ~/.gnupg/.gpg-agent-info -a -n "$(pgrep gpg-agent)"; then
   source ~/.gnupg/.gpg-agent-info
   export GPG_AGENT_INFO
+  GPG_TTY=$(tty)
+  export GPG_TTY
 else
   eval $(gpg-agent --daemon --write-env-file ~/.gnupg/.gpg-agent-info)
 fi
-
 ## History control
 export HISTCONTROL=ignoreboth
 shopt -s histappend
@@ -27,6 +28,8 @@ export MOZILLA_PATH=/Users/$USER/dev/gecko-dev/js/src/build_OPT.OBJ/dist/bin
 export V8_PATH=/Users/$USER/dev/v8/out/native
 
 export PATH=$V8_PATH:$MOZILLA_PATH:$PATH
+
+export PATH="/usr/local/opt/gnupg/libexec/gpgbin:$PATH"
 
 # Add RVM to PATH for scripting
 PATH=$PATH:$HOME/.rvm/bin
@@ -78,6 +81,7 @@ alias sizes='du -h -d1'
 alias hljs='pbpaste | highlight --syntax=js -O rtf | pbcopy'
 alias today="cal | grep -C6 --color \"$(date +%e)\""
 alias connect-irc="ssh -i irssi.pem leobalter@54.89.155.61"
+alias psync="npm install && npm prune && npm update"
 
 alias flushdns='dscacheutil -flushcache'
 alias js-dev='$MOZILLA_PATH/js'
