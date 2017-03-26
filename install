@@ -14,6 +14,49 @@ function relink() {
   fi
 }
 
+echo "--- Linking files ---"
+
+cd ~
+relink .bash_profile ~/.dotfiles/bash_profile
+relink .bashrc ~/.dotfiles/bashrc
+relink .gitconfig ~/.dotfiles/git-config
+relink .gitignore ~/.dotfiles/git-ignore-global
+relink .hgrc ~/.dotfiles/hgrc
+relink bin ~/.dotfiles/bin
+relink .vimrc ~/.dotfiles/vimrc
+relink .npmrc ~/.dotfiles/npmrc
+
+echo "Remember to generate your gpg key:
+
+1. Visit https://help.github.com/articles/generating-a-new-gpg-key/
+2. git config --global user.signingkey YOUR-SIGNING-KEY-PUB-ID"
+mkdir -p ~/.gnupg
+cd ~/.gnupg
+relink gpg.conf ~/.dotfiles/gpgconf
+relink gpg-agent.conf ~/.dotfiles/gpgagentconf
+
+# ---- Homebrew ----
+
+echo "Installing Homebrew"
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+echo "installing brew apps"
+brew install git node vim
+brew install gpg gpg-agent pinentry
+brew install lynx wget ack hub tree highlight ansible
+
+echo "installing brew cask"
+brew tap caskroom/cask
+
+echo "brew cask is installed, add more apps like:
+
+- brew cask install virtualbox
+- brew cask install vagrant
+- vagrant plugin install vagrant-exec"
+
+# ---- VIM ----
+echo "--- Setting vim plugins ---"
+
 # installs pathogen
 mkdir -p ~/.vim ~/.vim/autoload ~/.vim/bundle ~/.vim/colors && \
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
@@ -34,13 +77,6 @@ git clone https://github.com/bling/vim-airline ~/.vim/bundle/vim-airline
 
 curl -LSso ~/.vim/colors/lucario.vim https://raw.githubusercontent.com/raphamorim/lucario/master/colors/lucario.vim
 
-cd ~
-relink .bash_profile ~/.dotfiles/bash_profile
-relink .bashrc ~/.dotfiles/bashrc
-relink .gitconfig ~/.dotfiles/git-config
-relink .gitignore ~/.dotfiles/git-ignore-global
-relink .hgrc ~/.dotfiles/hgrc
-relink bin ~/.dotfiles/bin
-relink .vimrc ~/.dotfiles/vimrc
-relink .npmrc ~/.dotfiles/npmrc
+echo "--- Done! ---"
 
+cd ~

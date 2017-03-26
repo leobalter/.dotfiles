@@ -44,4 +44,3 @@ if v:version >= 703
 	set undofile
 	set colorcolumn=+1 "mark the ideal max text width
 endif
-
