@@ -28,13 +28,15 @@ shopt -s histappend
 # Put /usr/local/{sbin,bin} first
 export PATH=/usr/local/bin:$PATH
 export PATH=/Users/$USER/dev/depot_tools:$PATH
+export PATH=/Users/$USER/bin:$PATH
 
-export MOZILLA_PATH=/Users/$USER/dev/gecko-dev/js/src/build_OPT.OBJ/dist/bin
-export V8_PATH=/Users/$USER/dev/v8/out/native
+#export MOZILLA_PATH=/Users/$USER/dev/gecko-dev/js/src/build_OPT.OBJ/dist/bin
+export V8_PATH=/Users/$USER/dev/v8/out.gn/x64.release
 
-export PATH=$V8_PATH:$MOZILLA_PATH:$PATH
+export PATH=$V8_PATH:$PATH
 
-#export PATH="/usr/local/opt/gnupg/libexec/gpgbin:$PATH"
+# building v8
+export GYP_GENERATORS=ninja
 
 ## NVM
 # export NVM_DIR="$HOME/.nvm"
