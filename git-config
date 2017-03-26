@@ -1,7 +1,7 @@
 [user]
-  name = Leonardo Balter
+  name = Leo Balter
   email = leonardo.balter@gmail.com
-  signingkey = 4191D7EB5EC82FF7
+  signingkey = 2C75F319D398E36B
 
 [color]
   ui = auto
@@ -26,7 +26,6 @@
   top  = git rev-parse HEAD
   wip  = commit -a -m 'wip'
   nicelog = log --pretty=nice --graph --date-order --date=short --max-count=15
-
 
 [push]
   default = current

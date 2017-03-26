@@ -22,12 +22,13 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 "default indent settings
 set shiftwidth=4
 set softtabstop=4
-"set expandtab "use spaces instead of tabs
+set expandtab "use spaces instead of tabs
 set autoindent
 
-"some stuff to get the mouse going in term
-set mouse=a
-set ttymouse=xterm2
+" some stuff to get the mouse going in term
+"set mouse=a
+"set ttymouse=xterm2
+" who needs mouse on vim?
 
 "tell the term has 256 colors
 set t_Co=256

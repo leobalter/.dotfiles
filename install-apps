@@ -27,6 +27,4 @@ vagrant plugin install vagrant-exec
 # nvm
 mkdir ~/.nvm
 nvm install stable
-nvm install iojs
-nvm use iojs
 

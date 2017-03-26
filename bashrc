@@ -15,13 +15,14 @@ if test -f ~/.gnupg/.gpg-agent-info -a -n "$(pgrep gpg-agent)"; then
 else
   eval $(gpg-agent --daemon --write-env-file ~/.gnupg/.gpg-agent-info)
 fi
+
 ## History control
 export HISTCONTROL=ignoreboth
 shopt -s histappend
 
 ## PATH
 # Put /usr/local/{sbin,bin} first
-export PATH=/usr/local/share/npm/bin:/usr/local/bin:/usr/local/sbin:$PATH
+export PATH=/usr/local/bin:$PATH
 export PATH=/Users/$USER/dev/depot_tools:$PATH
 
 export MOZILLA_PATH=/Users/$USER/dev/gecko-dev/js/src/build_OPT.OBJ/dist/bin
@@ -29,42 +30,11 @@ export V8_PATH=/Users/$USER/dev/v8/out/native
 
 export PATH=$V8_PATH:$MOZILLA_PATH:$PATH
 
-export PATH="/usr/local/opt/gnupg/libexec/gpgbin:$PATH"
-
-# Add RVM to PATH for scripting
-PATH=$PATH:$HOME/.rvm/bin
+#export PATH="/usr/local/opt/gnupg/libexec/gpgbin:$PATH"
 
 ## NVM
-export NVM_DIR="$HOME/.nvm"
-. "$(brew --prefix nvm)/nvm.sh"
-
-## Java SDK
-export JAVA_HOME=$(/usr/libexec/java_home)
-
-## Test262 Path
-export TEST262_PATH=/Users/$USER/dev/test262
-
-# bin folders from ~, gems, and Homebrew
-for another_bin in \
-    $HOME/bin \
-    $HOME/bin/extras
-do
-    [[ -e $another_bin ]] && export PATH=$another_bin:$PATH
-done
-
-if [[ -n `which brew` ]]; then
-  # Find a Homebrew-built Python
-  python_bin=$(brew --cellar python)/*/bin
-  python_bin=`echo $python_bin`
-  [[ -e $python_bin ]] && export PATH=$python_bin:$PATH
-
-  [[ -e /usr/local/share/python ]] && export PATH=/usr/local/share/python:$PATH
-
-  # Find a Homebrew-built Ruby
-  ruby_bin=$(brew --cellar ruby)/*/bin
-  ruby_bin=`echo $ruby_bin`
-  [[ -e $ruby_bin ]] && export PATH=$ruby_bin:$PATH
-fi
+# export NVM_DIR="$HOME/.nvm"
+# . "$(brew --prefix nvm)/nvm.sh"
 
 # No ._ files in archives please
 export COPYFILE_DISABLE=true
@@ -72,22 +42,15 @@ export COPYFILE_DISABLE=true
 ## Aliases
 alias cls='clear'
 alias edit='open -a "Sublime Text"'
-alias atom='open -a "Atom"'
 alias code='open -a "Visual Studio Code"'
-alias brackets='open -a "Brackets"'
-alias delpyc="find . -name '*.pyc' -delete"
 alias tree='tree -Ca -I ".git|.svn|*.pyc|*.swp|node_modules"'
 alias sizes='du -h -d1'
 alias hljs='pbpaste | highlight --syntax=js -O rtf | pbcopy'
 alias today="cal | grep -C6 --color \"$(date +%e)\""
-alias connect-irc="ssh -i irssi.pem leobalter@54.89.155.61"
 alias psync="npm install && npm prune && npm update"
-
 alias flushdns='dscacheutil -flushcache'
-alias js-dev='$MOZILLA_PATH/js'
-alias d8='$V8_PATH/d8'
-alias test262-spidermonkey='bash ~/.dotfiles/bin/run-tests.sh $MOZILLA_PATH/js'
-alias test262-d8='bash ~/.dotfiles/bin/run-tests.sh $V8_PATH/d8'
+
+alias connect-irc="ssh -i irssi.pem leobalter@54.89.155.61"
 
 function show-empty-folders {
     find . -depth -type d -empty
@@ -102,15 +65,10 @@ set completion-ignore-case On
 
 for comp in \
     /usr/local/etc/bash_completion \
-    /usr/local/etc/bash_completion.d/git-completion.bash \
-    /usr/local/Cellar/node/0.12.7/etc/bash_completion.d/npm \
-    /usr/local/Cellar/nvm/0.23.3/etc/bash_completion.d/nvm
+    /usr/local/etc/bash_completion.d/git-completion.bash
 do
     [[ -e $comp ]] && source $comp
 done
-
-## Tab Completions for grunt-cli
-# eval "$(grunt --completion=bash)"
 
 ## Alias hub to git
 eval "$(hub alias -s)"
@@ -137,7 +95,6 @@ LIGHTNING_BOLT="⚡"
        RECYCLE="♺"
         MIDDOT="•"
      PLUSMINUS="±"
-
 
 function parse_git_branch {
   branch_pattern="^On branch ([^${IFS}]*)"
@@ -252,6 +209,3 @@ function pgrep {
   find . -maxdepth 1 -mindepth 1 | egrep -v "$exclude" | xargs egrep -lir "$1" | egrep -v "$exclude" | xargs egrep -Hin --color "$1"
 }
 
-
-# added by travis gem
-[ -f /Users/leobalter/.travis/travis.sh ] && source /Users/leobalter/.travis/travis.sh

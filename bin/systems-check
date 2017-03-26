@@ -16,7 +16,7 @@ _not_found() {
 
 echo
 
-echo "Langauges"
+echo "Languages"
 echo "---------"
 (which python && python --version) || _not_found "Python"
 (which ruby && ruby --version) || _not_found "Ruby"
