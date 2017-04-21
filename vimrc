@@ -12,8 +12,13 @@ set hlsearch "hilight searches by default
 syntax on
 set number
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-colorscheme monokai
+"colorscheme monokai
+colorscheme lucario
 set backspace=indent,eol,start
+
+" For test262
+au BufNewFile,BufRead *.template set ft=javascript
+au BufNewFile,BufRead *.case set ft=javascript
 
 " Open NERDTree if no given file
 autocmd StdinReadPre * let s:std_in=1
