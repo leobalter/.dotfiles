@@ -41,7 +41,7 @@ echo "Installing Homebrew"
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 echo "installing brew apps"
-brew install git node vim
+brew install git node vim yarn
 brew install gpg gpg-agent pinentry
 brew install lynx wget ack hub tree highlight ansible
 
@@ -76,6 +76,11 @@ git clone https://github.com/bling/vim-airline ~/.vim/bundle/vim-airline
 # vim -u NONE -c "helptags vim-fugitive/doc" -c q
 
 curl -LSso ~/.vim/colors/lucario.vim https://raw.githubusercontent.com/raphamorim/lucario/master/colors/lucario.vim
+
+# ---- Yarn ----
+echo "--- Yarn ---"
+yarn config set prefix "$HOME/.yarn/"
+yarn global add test262-harness
 
 echo "--- Done! ---"
 
