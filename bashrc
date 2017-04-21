@@ -178,12 +178,9 @@ function setWindowTitle {
 }
 
 function set_prompt {
-  [[ -n $HOMEBREW_DEBUG_INSTALL ]] && \
-    homebrew_prompt="${BROWN}Homebrew:${COLOR_NONE} debugging ${HOMEBREW_DEBUG_INSTALL}\n"
-
   git_prompt="$(parse_git_branch)"
 
-  export PS1="[\w] ${git_prompt}${COLOR_NONE}\n${homebrew_prompt}\$ "
+  export PS1="[\w] ${git_prompt}${COLOR_NONE}\n "
 
   # Domain is stripped from hostname
   case $HOSTNAME in
