@@ -27,18 +27,20 @@ shopt -s histappend
 ## PATH
 # Put /usr/local/{sbin,bin} first
 export PATH=/usr/local/bin:$PATH
-export PATH=/Users/$USER/dev/depot_tools:$PATH
-export PATH=/Users/$USER/bin:$PATH
-export PATH=/Users/$USER/.yarn/bin:$PATH
+export PATH=$HOME/dev/depot_tools:$PATH
+export PATH=$HOME/bin:$PATH
+export PATH=$HOME/.yarn/bin:$PATH
 
 # To install symlinks for compilers that will automatically use
 # ccache, prepend this directory to your PATH:
 export PATH=/usr/local/opt/ccache/libexec:$PATH
 
-export MOZILLA_PATH=/Users/$USER/dev/mozilla-central/js/src/build_OPT.OBJ/dist/bin
+export MOZILLA_PATH=$HOME/dev/gecko-dev/js/src/build_OPT.OBJ/dist/bin
 export PATH=$MOZILLA_PATH:$PATH
-export V8_PATH=/Users/$USER/dev/v8/out.gn/x64.release
+export V8_PATH=$HOME/dev/v8/out.gn/x64.release
 export PATH=$V8_PATH:$PATH
+
+export PATH=$HOME/dev/moz-git-tools:$PATH
 
 # building v8
 export GYP_GENERATORS=ninja

@@ -54,3 +54,5 @@
 
 [rebase]
 	autoSquash = true
+[cinnabar]
+	helper = /Users/leo/dev/git-cinnabar/git-cinnabar-helper
