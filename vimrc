@@ -12,8 +12,8 @@ set hlsearch "hilight searches by default
 syntax on
 set number
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-"colorscheme monokai
-colorscheme lucario
+colorscheme monokai
+"colorscheme lucario
 set backspace=indent,eol,start
 
 " For test262
