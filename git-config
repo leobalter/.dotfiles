@@ -32,7 +32,7 @@
   followTags = true
 
 [core]
-  excludesfile = ~/.gitignore
+	excludesfile = ~/.gitignore
   editor = /usr/local/bin/vim
   ignorecase = true
 
@@ -56,3 +56,5 @@
 	autoSquash = true
 [cinnabar]
 	helper = /Users/leo/dev/git-cinnabar/git-cinnabar-helper
+[help]
+	autocorrect = 1

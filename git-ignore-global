@@ -1,4 +1,9 @@
 .DS_Store
 *.py[co]
 *.pbxuser
-*.mode[12]v3
+**~
+build_OPT.OBJ/
+.DS_Store
+.*.swp
+.code
+.mode[12]v3
