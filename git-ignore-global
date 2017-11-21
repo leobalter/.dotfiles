@@ -3,7 +3,10 @@
 *.pbxuser
 **~
 build_OPT.OBJ/
+temp.patch/
 .DS_Store
 .*.swp
 .code
 .mode[12]v3
+.vscode/
+

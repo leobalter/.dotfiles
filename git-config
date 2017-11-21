@@ -58,3 +58,5 @@
 	helper = /Users/leo/dev/git-cinnabar/git-cinnabar-helper
 [help]
 	autocorrect = 1
+[diff]
+	renameLimit = 4096

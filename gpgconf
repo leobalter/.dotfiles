@@ -5,3 +5,6 @@ use-agent
 # Use at your own discretion - may prevent the successful interactive use of some operations.
 # It is working fine for my use cases though.
 batch
+
+no-tty
+

@@ -1,0 +1,6 @@
+#!/bin/bash
+rm -r temp.patch
+git format-patch -U9 -k -p master -o temp.patch
+git-patch-to-hg-patch temp.patch/*
+open temp.patch/
+

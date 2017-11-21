@@ -27,20 +27,27 @@ shopt -s histappend
 ## PATH
 # Put /usr/local/{sbin,bin} first
 export PATH=/usr/local/bin:$PATH
+export PATH=/usr/local/opt/python/libexec/bin:$PATH
 export PATH=$HOME/dev/depot_tools:$PATH
 export PATH=$HOME/bin:$PATH
-export PATH=$HOME/.yarn/bin:$PATH
+# export PATH=$HOME/.yarn/bin:$PATH
 
 # To install symlinks for compilers that will automatically use
 # ccache, prepend this directory to your PATH:
 export PATH=/usr/local/opt/ccache/libexec:$PATH
 
-export MOZILLA_PATH=$HOME/dev/gecko-dev/js/src/build_OPT.OBJ/dist/bin
+#export MOZILLA_PATH=$HOME/dev/gecko-dev/js/src/build_OPT.OBJ/dist/bin
+export MOZILLA_PATH=$HOME/dev/jsshell-mac
 export PATH=$MOZILLA_PATH:$PATH
 export V8_PATH=$HOME/dev/v8/out.gn/x64.release
 export PATH=$V8_PATH:$PATH
 
 export PATH=$HOME/dev/moz-git-tools:$PATH
+export PATH=$HOME/dev/git-cinnabar:$PATH
+
+# Browser Paths
+export NIGHTLY=/Applications/FirefoxNightly.app/Contents/MacOS/firefox
+export FIREFOX=/Applications/Firefox.app/Contents/MacOS/firefox
 
 # building v8
 export GYP_GENERATORS=ninja
@@ -64,6 +71,7 @@ alias psync="npm install && npm prune && npm update"
 alias flushdns='dscacheutil -flushcache'
 
 alias connect-irc="ssh -i irssi.pem leobalter@54.89.155.61"
+alias mozilla-try="$HOME/dev/gecko-dev/mach try -b do -p linux -u jsreftest -t none"
 
 function show-empty-folders {
     find . -depth -type d -empty
