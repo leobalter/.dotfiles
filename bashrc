@@ -8,8 +8,7 @@ fi
 
 # killall gpg-agent && gpg-agent --daemon --use-standard-socket --pinentry-program /usr/local/bin/pinentry
 # gpg-agent - https://github.com/pstadler/keybase-gpg-github#optional-dont-ask-for-password-every-time
-# eval $(gpg-agent --daemon \
-    --pinentry-program /usr/local/bin/pinentry)
+# eval $(gpg-agent --daemon --pinentry-program /usr/local/bin/pinentry)
 
 ## History control
 export HISTCONTROL=ignoreboth
