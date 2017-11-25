@@ -76,15 +76,19 @@ git clone https://github.com/editorconfig/editorconfig-vim
 # git clone git://github.com/tpope/vim-fugitive.git
 # vim -u NONE -c "helptags vim-fugitive/doc" -c q
 mkdir -P ~/.vim/colors/
-relink $HOME/.vim/colors/ $HOME/.dotfiles/vim-colors/monokai.vim
-relink $HOME/.vim/colors/ $HOME/.dotfiles/vim-colors/lucario.vim
+relink $HOME/.vim/colors/monokai.vim $HOME/.dotfiles/vim-colors/monokai.vim
+relink $HOME/.vim/colors/lucario.vim $HOME/.dotfiles/vim-colors/lucario.vim
 
 curl -LSso ~/.vim/colors/lucario.vim https://raw.githubusercontent.com/raphamorim/lucario/master/colors/lucario.vim
 
 # ---- Yarn ----
 echo "--- Yarn ---"
 yarn config set prefix "$HOME/.yarn/"
-yarn global add test262-harness
+
+
+# npm
+echo "--- npm ---"
+npm i -g test262-harness babel
 
 echo "--- Done! ---"
 
