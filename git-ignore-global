@@ -10,3 +10,5 @@ temp.patch/
 .mode[12]v3
 .vscode/
 
+test262-results/
+

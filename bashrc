@@ -15,10 +15,16 @@ export HISTCONTROL=ignoreboth
 shopt -s histappend
 
 ## PATH
+
+export HOME_DEV=$HOME/dev
+
+# Mono from Homebrew
+export MONO_GAC_PREFIX="/usr/local"
+
 # Put /usr/local/{sbin,bin} first
 export PATH=/usr/local/bin:$PATH
-export PATH=/usr/local/opt/python/libexec/bin:$PATH
-export PATH=$HOME/dev/depot_tools:$PATH
+# export PATH=/usr/local/opt/python/libexec/bin:$PATH
+export PATH=$HOME_DEV/depot_tools:$PATH
 export PATH=$HOME/bin:$PATH
 # export PATH=$HOME/.yarn/bin:$PATH
 
@@ -26,14 +32,25 @@ export PATH=$HOME/bin:$PATH
 # ccache, prepend this directory to your PATH:
 export PATH=/usr/local/opt/ccache/libexec:$PATH
 
-#export MOZILLA_PATH=$HOME/dev/gecko-dev/js/src/build_OPT.OBJ/dist/bin
-export MOZILLA_PATH=$HOME/dev/jsshell-mac
-export PATH=$MOZILLA_PATH:$PATH
-export V8_PATH=$HOME/dev/v8/out.gn/x64.release
-export PATH=$V8_PATH:$PATH
+# https://github.com/GoogleChromeLabs/jsvu
+export PATH=$HOME/.jsvu:$PATH
 
-export PATH=$HOME/dev/moz-git-tools:$PATH
-export PATH=$HOME/dev/git-cinnabar:$PATH
+# export MOZILLA_PATH=$HOME_DEV/gecko-dev/js/src/build_OPT.OBJ/dist/bin
+# export MOZILLA_PATH=$HOME_DEV/jsshell-mac
+# export PATH=$MOZILLA_PATH:$PATH
+
+# export V8_PATH=$HOME_DEV/v8/out.gn/x64.release
+# export PATH=$V8_PATH:$PATH
+
+# export CHAKRACORE_PATH=$HOME_DEV/ChakraCoreFiles/bin
+# export PATH=$CHAKRACORE_PATH:$PATH
+
+export PATH=$HOME_DEV/webkit/Tools/Scripts:$PATH
+
+# export PATH=$HOME_DEV/moz-git-tools:$PATH
+# export PATH=$HOME_DEV/git-cinnabar:$PATH
+
+source ~/perl5/perlbrew/etc/bashrc
 
 # Browser Paths
 export NIGHTLY=/Applications/FirefoxNightly.app/Contents/MacOS/firefox
@@ -41,6 +58,9 @@ export FIREFOX=/Applications/Firefox.app/Contents/MacOS/firefox
 
 # building v8
 export GYP_GENERATORS=ninja
+
+# jsc requires a path to DYLD_FRAMEWORK_PATH
+# export DYLD_FRAMEWORK_PATH=$HOME_DEV/webkit/WebKitBuild/Release
 
 ## NVM
 # export NVM_DIR="$HOME/.nvm"
@@ -61,7 +81,11 @@ alias psync="npm install && npm prune && npm update"
 alias flushdns='dscacheutil -flushcache'
 
 alias connect-irc="ssh -i irssi.pem leobalter@54.89.155.61"
-alias mozilla-try="$HOME/dev/gecko-dev/mach try -b do -p linux -u jsreftest -t none"
+alias mozilla-try="$HOME_DEV/gecko-dev/mach try -b do -p linux -u jsreftest -t none"
+
+# Homebrew wontfix workaround
+alias python=python2
+alias pip=pip2
 
 function show-empty-folders {
     find . -depth -type d -empty
@@ -130,7 +154,7 @@ function parse_git_branch {
     return
   fi
 
-  branch=${BASH_REMATCH[1]}
+  branch="${CYAN}${BASH_REMATCH[1]}${COLOR_NONE}"
 
   # Dirty?
   if [[ ! ${git_status} =~ "working directory clean" ]]; then
@@ -166,7 +190,7 @@ function parse_git_branch {
     remote="${YELLOW}${UD_ARROW}"
   fi
 
-  echo "${remote}${remote_ff}${GREEN}(${branch})${COLOR_NONE}${git_is_dirty}${COLOR_NONE}"
+  echo "${remote}${remote_ff}${branch}${git_is_dirty}"
 }
 
 function setWindowTitle {
@@ -178,21 +202,19 @@ function setWindowTitle {
 }
 
 function set_prompt {
-  git_prompt="$(parse_git_branch)"
+  if [[ ${PWD} == "${HOME_DEV}/webkit" ]]; then
+    git_prompt="${YELLOW}$(git rev-parse --abbrev-ref HEAD)${COLOR_NONE}"
+  else
+    git_prompt="$(parse_git_branch)"
+  fi
 
-  export PS1="[\w] ${git_prompt}${COLOR_NONE}\n "
+  if [[ ${git_prompt} ]]; then
+    export PS1="[\w] ${git_prompt}${COLOR_NONE}\n"
+  else
+    export PS1="[\w]\n"
+  fi
 
-  # Domain is stripped from hostname
-  case $HOSTNAME in
-    LeoBalter-Bocoup.local)
-      this_host=
-      ;;
-    *)
-      this_host="${HOSTNAME%%.*}:"
-      ;;
-  esac
-
-  setWindowTitle "${this_host}${PWD/$HOME/~}"
+  setWindowTitle "${PWD/$HOME/~}"
 }
 export PROMPT_COMMAND=set_prompt
 
@@ -217,3 +239,6 @@ function pgrep {
   find . -maxdepth 1 -mindepth 1 | egrep -v "$exclude" | xargs egrep -lir "$1" | egrep -v "$exclude" | xargs egrep -Hin --color "$1"
 }
 
+
+# added by travis gem
+[ -f /Users/leo/.travis/travis.sh ] && source /Users/leo/.travis/travis.sh

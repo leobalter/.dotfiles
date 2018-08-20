@@ -45,6 +45,9 @@ brew install git node vim yarn
 brew install gpg gpg-agent pinentry
 brew install lynx wget ack hub tree highlight ansible
 
+echo "installing perlbrew"
+curl -L https://install.perlbrew.pl | bash
+
 echo "installing brew cask"
 brew tap caskroom/cask
 
