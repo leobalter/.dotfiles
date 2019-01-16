@@ -21,6 +21,10 @@ export HOME_DEV=$HOME/dev
 # Mono from Homebrew
 export MONO_GAC_PREFIX="/usr/local"
 
+# For es6draft
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home
+export TEST262_PATH=$HOME_DEV/test262
+
 # Put /usr/local/{sbin,bin} first
 export PATH=/usr/local/bin:$PATH
 # export PATH=/usr/local/opt/python/libexec/bin:$PATH
@@ -69,6 +73,9 @@ export GYP_GENERATORS=ninja
 # No ._ files in archives please
 export COPYFILE_DISABLE=true
 
+# Forward git agent
+ssh-add $HOME/.ssh/id_rsa
+
 ## Aliases
 alias cls='clear'
 alias edit='open -a "Sublime Text"'
@@ -80,7 +87,6 @@ alias today="cal | grep -C6 --color \"$(date +%e)\""
 alias psync="npm install && npm prune && npm update"
 alias flushdns='dscacheutil -flushcache'
 
-alias connect-irc="ssh -i irssi.pem leobalter@54.89.155.61"
 alias mozilla-try="$HOME_DEV/gecko-dev/mach try -b do -p linux -u jsreftest -t none"
 
 # Homebrew wontfix workaround
@@ -242,3 +248,4 @@ function pgrep {
 
 # added by travis gem
 [ -f /Users/leo/.travis/travis.sh ] && source /Users/leo/.travis/travis.sh
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
