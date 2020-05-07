@@ -39,14 +39,13 @@ echo "Remember to generate your gpg key:
 # ---- Homebrew ----
 
 echo "Installing Homebrew"
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 echo "installing brew apps"
 brew install git vim nvm
 brew install lynx wget ack hub tree highlight
 
-echo "installing perlbrew"
-curl -L https://install.perlbrew.pl | bash
+nvm install latest
 
 # ---- VIM ----
 echo "--- Setting vim plugins ---"
