@@ -69,6 +69,9 @@ export GYP_GENERATORS=ninja
 ## NVM
 # export NVM_DIR="$HOME/.nvm"
 # . "$(brew --prefix nvm)/nvm.sh"
+export NVM_DIR="$HOME/.nvm"
+  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
 
 # No ._ files in archives please
 export COPYFILE_DISABLE=true
@@ -245,7 +248,8 @@ function pgrep {
   find . -maxdepth 1 -mindepth 1 | egrep -v "$exclude" | xargs egrep -lir "$1" | egrep -v "$exclude" | xargs egrep -Hin --color "$1"
 }
 
-
 # added by travis gem
 [ -f /Users/leo/.travis/travis.sh ] && source /Users/leo/.travis/travis.sh
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"

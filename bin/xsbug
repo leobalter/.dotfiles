@@ -1,0 +1,2 @@
+#!/bin/bash
+open $MODDABLE//build/bin/mac/release/xsbug.app

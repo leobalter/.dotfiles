@@ -1,0 +1,8 @@
+#!/bin/bash
+
+(
+  set -x;
+  cd $ACUSIM/whirlpool/qplus/oven-kitchenaid;
+  rm -rf $MODDABLE/build/tmp/mac/debug/mc/oven-kitchenaid-acusim;
+  mcconfig -d -m manifest-test.json
+)

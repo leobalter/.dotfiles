@@ -12,3 +12,8 @@ temp.patch/
 
 test262-results/
 
+node_modules/
+
+init.deploy
+deploy/ansible/init.retry
+

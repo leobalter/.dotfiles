@@ -19,6 +19,7 @@ echo "--- Linking files ---"
 cd ~
 relink .bash_profile ~/.dotfiles/bash_profile
 relink .bashrc ~/.dotfiles/bashrc
+relink .zshrc ~/.dotfiles/zshrc
 relink .gitconfig ~/.dotfiles/git-config
 relink .gitignore ~/.dotfiles/git-ignore-global
 relink .hgrc ~/.dotfiles/hgrc
