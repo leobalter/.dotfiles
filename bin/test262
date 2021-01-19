@@ -7,24 +7,31 @@ use Getopt::Long qw(GetOptions);
 
 my $args = '';
 
+my %engines = (
+    d8 => 'v8'
+);
+
+# I need to specify the full path for JSC to make it work with the test262-harness
+# my $jscPath = qx/which jsc/;
+# chomp $jscPath;
+
 GetOptions(
     'diff' => sub {
-        $args .= "\$(git diff --name-only --diff-filter=d master -- test) ";
+        $args .= "\$(git diff --name-only --diff-filter=d tc39/main -- test) ";
     },
+    'all' => sub {
+        %engines = (
+            sm => 'spidermonkey',
+            engine262 => 'engine262',
+            hermes => 'hermes',
+            xs => 'xs',
+            d8 => 'v8',
+            jsc => 'jsc'
+        );
+    }
 );
 
 my $files = join(' ', @ARGV);
-
-# I need to specify the full path for JSC to make it work with the test262-harness
-my $jscPath = qx/which jsc/;
-chomp $jscPath;
-
-my %engines = (
-    jsshell => 'spidermonkey',
-    ch => 'ch',
-    d8 => 'v8',
-    jsc => $jscPath,
-);
 
 keys %engines;
 while (my ($type, $path) = each %engines) {
@@ -36,3 +43,8 @@ while (my ($type, $path) = each %engines) {
 }
 
 print "done\n";
+
+# eshost host type (ch, engine262, javascriptcore, sm,
+# spidermonkey, v8, graaljs, BrowserAgent, chakra, chrome,
+# d8, edge, firefox, hermes, jsc, jsshell, nashorn, node,
+# qjs, remote, safari, xs, etc.)

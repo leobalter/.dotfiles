@@ -5,6 +5,7 @@ interface = curses
 git = true
 showfunc = true
 [extensions]
+evolve = 
 color = 
 pager = 
 histedit = 

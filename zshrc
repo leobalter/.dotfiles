@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/leo/.oh-my-zsh"
+export ZSH="/Users/$USER/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -108,6 +108,7 @@ export TEST262_PATH=$HOME/dev/test262
 # Put /usr/local/{sbin,bin} first
 export PATH=/usr/local/bin:$PATH
 export PATH=$HOME/bin:$PATH
+# export PATH=$HOME/Library/Python/2.7/bin:$PATH
 
 # To install symlinks for compilers that will automatically use
 # ccache, prepend this directory to your PATH:
@@ -115,12 +116,10 @@ export PATH=$HOME/bin:$PATH
 # https://github.com/GoogleChromeLabs/jsvu
 export PATH=$HOME/.esvu/bin:$PATH
 
-# Moddable SDK
-# https://github.com/Moddable-OpenSource/moddable/blob/public/documentation/Moddable%20SDK%20-%20Getting%20Started.md
-export MODDABLE="$HOME/dev/moddable"
-export PATH="${MODDABLE}/build/bin/mac/release:$PATH"
-
-export ACUSIM="$HOME/dev/acu-sim"
+# Gem
+GEM_HOME=$HOME/.gem
+export PATH=$GEM_HOME/bin:$PATH
+export PATH=$GEM_HOME/ruby/2.6.0/bin:$PATH
 
 ## NVM
 export NVM_DIR="$HOME/.nvm"
@@ -145,8 +144,8 @@ alias psync="npm install && npm prune && npm update"
 alias flushdns='dscacheutil -flushcache'
 
 # Homebrew wontfix workaround
-alias python=python2
-alias pip=pip2
+alias python=python3
+alias pip=pip3
 
 ## Tab Completions
 set completion-ignore-case On
@@ -174,9 +173,17 @@ if type brew &>/dev/null; then
 fi
 
 # added by travis gem
-[ -f /Users/leo/.travis/travis.sh ] && source /Users/leo/.travis/travis.sh
+[ -f /Users/$USER/.travis/travis.sh ] && source /Users/$USER/.travis/travis.sh
 
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # heroku autocomplete setup
-HEROKU_AC_ZSH_SETUP_PATH=/Users/leo/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
+HEROKU_AC_ZSH_SETUP_PATH=/Users/$USER/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# gecko-dev
+source $HOME/.cargo/env
+export LDFLAGS="-L/usr/local/opt/icu4c/lib"
+export CPPFLAGS="-I/usr/local/opt/icu4c/include"
+export PATH=/usr/local/opt/ccache/libexec:$PATH

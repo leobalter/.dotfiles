@@ -68,7 +68,7 @@ git clone https://github.com/editorconfig/editorconfig-vim
 # git clone git@github.com:terryma/vim-multiple-cursors.git
 # git clone git://github.com/tpope/vim-fugitive.git
 # vim -u NONE -c "helptags vim-fugitive/doc" -c q
-mkdir -P ~/.vim/colors/
+mkdir  ~/.vim/colors/
 
 curl -LSso ~/.vim/colors/lucario.vim https://raw.githubusercontent.com/raphamorim/lucario/master/colors/lucario.vim
 

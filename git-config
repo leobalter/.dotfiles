@@ -1,6 +1,6 @@
 [user]
-  name = Leo Balter
-  email = leonardo.balter@gmail.com
+	name = Leo Balter
+	email = leonardo.balter@gmail.com
 
 [color]
   ui = auto
@@ -49,8 +49,10 @@
 [rebase]
 	autoSquash = true
 [cinnabar]
-	helper = /Users/leo/dev/git-cinnabar/git-cinnabar-helper
+	helper = /usr/local/Cellar/git-cinnabar/0.5.5/libexec/git-cinnabar-helper
 [help]
 	autocorrect = 1
 [diff]
 	renameLimit = 4096
+[pull]
+	ff = only
