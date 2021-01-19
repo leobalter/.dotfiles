@@ -36,10 +36,15 @@ echo "Remember to generate your gpg key:
 # relink gpg.conf ~/.dotfiles/gpgconf
 # relink gpg-agent.conf ~/.dotfiles/gpgagentconf
 
+# Install oh-my-zsh
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+
 # ---- Homebrew ----
 
 echo "Installing Homebrew"
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+chmod -R go-w "$(brew --prefix)/share"
 
 echo "installing brew apps"
 brew install git vim nvm
@@ -73,7 +78,6 @@ mkdir  ~/.vim/colors/
 curl -LSso ~/.vim/colors/lucario.vim https://raw.githubusercontent.com/raphamorim/lucario/master/colors/lucario.vim
 
 relink $HOME/.vim/colors/monokai.vim $HOME/.dotfiles/vim-colors/monokai.vim
-relink $HOME/.vim/colors/lucario.vim $HOME/.dotfiles/vim-colors/lucario.vim
 
 echo "--- Done! ---"
 

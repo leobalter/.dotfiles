@@ -130,7 +130,8 @@ export NVM_DIR="$HOME/.nvm"
 export COPYFILE_DISABLE=true
 
 # Forward git agent
-ssh-add $HOME/.ssh/id_rsa
+# ssh-add $HOME/.ssh/id_rsa
+ssh-add $HOME/.ssh/id_ed25519
 
 ## Aliases
 alias cls='clear'
@@ -183,7 +184,7 @@ HEROKU_AC_ZSH_SETUP_PATH=/Users/$USER/Library/Caches/heroku/autocomplete/zsh_set
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # gecko-dev
-source $HOME/.cargo/env
-export LDFLAGS="-L/usr/local/opt/icu4c/lib"
-export CPPFLAGS="-I/usr/local/opt/icu4c/include"
-export PATH=/usr/local/opt/ccache/libexec:$PATH
+# source $HOME/.cargo/env
+# export LDFLAGS="-L/usr/local/opt/icu4c/lib"
+# export CPPFLAGS="-I/usr/local/opt/icu4c/include"
+# export PATH=/usr/local/opt/ccache/libexec:$PATH
