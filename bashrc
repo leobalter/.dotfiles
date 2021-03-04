@@ -1,6 +1,8 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+echo 'NOOOOOO'
+
 # use browserstack_key file to set your browserstack credentials
 if [ -f ~/.browserstack_key ]; then
   . ~/.browserstack_key
@@ -253,3 +255,5 @@ function pgrep {
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"

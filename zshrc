@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -9,7 +16,8 @@ export ZSH="/Users/$USER/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ZSH_THEME="dracula"
-ZSH_THEME="amuse"
+# ZSH_THEME="amuse"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -102,10 +110,6 @@ source $ZSH/oh-my-zsh.sh
 # Mono from Homebrew
 export MONO_GAC_PREFIX="/usr/local"
 
-# For es6draft
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home
-export TEST262_PATH=$HOME/dev/test262
-
 # Put /usr/local/{sbin,bin} first
 export PATH=/usr/local/bin:$PATH
 export PATH=$HOME/bin:$PATH
@@ -117,23 +121,14 @@ export PATH=$HOME/Library/Python/3.9/bin:$PATH
 
 # https://github.com/GoogleChromeLabs/jsvu
 export PATH=$HOME/.esvu/bin:$PATH
-
-# Gem
-GEM_HOME=$HOME/.gem
-export PATH=$GEM_HOME/bin:$PATH
-export PATH=$GEM_HOME/ruby/2.6.0/bin:$PATH
-
-## NVM
-export NVM_DIR="$HOME/.nvm"
-  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
+export PATH=$HOME/dev/WebKit/Tools/Scripts:$PATH
 
 # No ._ files in archives please
 export COPYFILE_DISABLE=true
 
 # Forward git agent
 # ssh-add $HOME/.ssh/id_rsa
-ssh-add $HOME/.ssh/id_ed25519
+ssh-add $HOME/.ssh/id_ed25519 &>/dev/null
 
 ## Aliases
 alias cls='clear'
@@ -154,9 +149,9 @@ alias pip=pip3
 set completion-ignore-case On
 
 # auto-completion
-if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
-  . /opt/local/etc/profile.d/bash_completion.sh
-fi
+# if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
+#   . /opt/local/etc/profile.d/bash_completion.sh
+# fi
 
 ## Alias hub to git
 eval "$(hub alias -s)"
@@ -176,17 +171,27 @@ if type brew &>/dev/null; then
 fi
 
 # added by travis gem
-[ -f /Users/$USER/.travis/travis.sh ] && source /Users/$USER/.travis/travis.sh
-
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# [ -f /Users/$USER/.travis/travis.sh ] && source /Users/$USER/.travis/travis.sh
 
 # heroku autocomplete setup
-HEROKU_AC_ZSH_SETUP_PATH=/Users/$USER/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
+# HEROKU_AC_ZSH_SETUP_PATH=/Users/$USER/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# https://gist.github.com/kevin-smets/8568070#syntax-highlighting
+export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # gecko-dev
 # source $HOME/.cargo/env
 # export LDFLAGS="-L/usr/local/opt/icu4c/lib"
 # export CPPFLAGS="-I/usr/local/opt/icu4c/include"
 # export PATH=/usr/local/opt/ccache/libexec:$PATH
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+
