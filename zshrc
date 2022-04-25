@@ -116,15 +116,14 @@ export PATH=$HOME/bin:$PATH
 # export PATH=$HOME/Library/Python/2.7/bin:$PATH
 export PATH=$HOME/Library/Python/3.9/bin:$PATH
 
-# To install symlinks for compilers that will automatically use
-# ccache, prepend this directory to your PATH:
 
-# https://github.com/GoogleChromeLabs/jsvu
 export PATH=$HOME/.esvu/bin:$PATH
 export PATH=$HOME/dev/WebKit/Tools/Scripts:$PATH
 
 # No ._ files in archives please
 export COPYFILE_DISABLE=true
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Forward git agent
 # ssh-add $HOME/.ssh/id_rsa
@@ -154,7 +153,7 @@ set completion-ignore-case On
 # fi
 
 ## Alias hub to git
-eval "$(hub alias -s)"
+# eval "$(hub alias -s)"
 
 function pgrep {
   local exclude="\.svn|\.git|\.swp|\.coverage|\.pyc|_build"
@@ -164,7 +163,14 @@ function pgrep {
 # Brew completions
 # https://docs.brew.sh/Shell-Completion
 if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+  BREWSHARE=`brew --prefix`/share
+  FPATH=BREWSHARE/zsh/site-functions:$FPATH
+
+  # https://gist.github.com/kevin-smets/8568070#syntax-highlighting
+  # export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=$BREWSHARE/zsh-syntax-highlighting/highlighters/share
+  source $BREWSHARE/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+  source $BREWSHARE/zsh-autosuggestions/zsh-autosuggestions.zsh
 
   autoload -Uz compinit
   compinit
@@ -178,12 +184,6 @@ fi
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-# https://gist.github.com/kevin-smets/8568070#syntax-highlighting
-export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
 # gecko-dev
 # source $HOME/.cargo/env
 # export LDFLAGS="-L/usr/local/opt/icu4c/lib"
@@ -192,5 +192,6 @@ source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"

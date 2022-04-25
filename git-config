@@ -32,7 +32,7 @@
 
 [core]
 	excludesfile = ~/.gitignore
-  editor = /usr/local/bin/vim
+  editor = vim
   ignorecase = true
 
 [github]
@@ -48,8 +48,6 @@
 
 [rebase]
 	autoSquash = true
-[cinnabar]
-	helper = /usr/local/Cellar/git-cinnabar/0.5.5/libexec/git-cinnabar-helper
 [help]
 	autocorrect = 1
 [diff]
