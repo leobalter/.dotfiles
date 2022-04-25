@@ -6,5 +6,5 @@ use-agent
 # It is working fine for my use cases though.
 batch
 
-no-tty
+# no-tty
 

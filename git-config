@@ -56,3 +56,7 @@
 	ff = only
 [init]
 	defaultBranch = main
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg
