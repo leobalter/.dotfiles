@@ -1,11 +1,8 @@
-# Enables GPG to find gpg-agent
-use-standard-socket
-
 # Connects gpg-agent to the OSX keychain via the brew-installed
 # pinentry program from GPGtools. This is the OSX 'magic sauce',
 # allowing the gpg key's passphrase to be stored in the login
 # keychain, enabling automatic key signing.
-pinentry-program $(brew --prefix)/bin/pinentry-mac
+pinentry-program /opt/homebrew/bin/pinentry-mac
 
 default-cache-ttl 34560000
 max-cache-ttl 34560000
