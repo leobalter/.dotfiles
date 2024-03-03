@@ -184,12 +184,6 @@ fi
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-# gecko-dev
-# source $HOME/.cargo/env
-# export LDFLAGS="-L/usr/local/opt/icu4c/lib"
-# export CPPFLAGS="-I/usr/local/opt/icu4c/include"
-# export PATH=/usr/local/opt/ccache/libexec:$PATH
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 

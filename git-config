@@ -1,6 +1,6 @@
 [user]
 	name = Leo Balter
-	email = leonardo.balter@gmail.com
+	email = 301201+leobalter@users.noreply.github.com
 
 [color]
   ui = auto
@@ -59,4 +59,6 @@
 [commit]
 	gpgsign = true
 [gpg]
-	program = gpg
+	program = /opt/homebrew/bin/gpg
+[tag]
+	gpgSign = true
