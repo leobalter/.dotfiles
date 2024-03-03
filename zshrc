@@ -77,7 +77,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git web-search)
+plugins=(macos git gh web-search npm volta)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -115,7 +115,6 @@ export PATH=/usr/local/bin:$PATH
 export PATH=$HOME/bin:$PATH
 # export PATH=$HOME/Library/Python/2.7/bin:$PATH
 export PATH=$HOME/Library/Python/3.9/bin:$PATH
-
 
 export PATH=$HOME/.esvu/bin:$PATH
 export PATH=$HOME/dev/WebKit/Tools/Scripts:$PATH
@@ -169,7 +168,6 @@ if type brew &>/dev/null; then
   # https://gist.github.com/kevin-smets/8568070#syntax-highlighting
   # export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=$BREWSHARE/zsh-syntax-highlighting/highlighters/share
   source $BREWSHARE/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
   source $BREWSHARE/zsh-autosuggestions/zsh-autosuggestions.zsh
 
   autoload -Uz compinit
