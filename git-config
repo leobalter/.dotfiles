@@ -65,4 +65,4 @@
 [tag]
 	gpgSign = true
 [gpg "ssh"]
-	allowedSignersFile = /Users/leobalter/.config/git/allowed_signers
+	allowedSignersFile = ~/.allowedsigners

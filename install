@@ -6,6 +6,9 @@ function relink() {
     # Symbolic link? Then recreate.
     rm "$1"
     ln -sn "$2" "$1"
+  elif [[ -e "$1" ]]; then
+    echo "Backing up $1"
+    mv "$1" "$1.old"
   elif [[ ! -e "$1" ]]; then
     echo "Linking $1"
     ln -sn "$2" "$1"
@@ -23,6 +26,7 @@ relink .hgrc ~/.dotfiles/hgrc
 relink bin ~/.dotfiles/bin
 relink .vimrc ~/.dotfiles/vimrc
 relink .npmrc ~/.dotfiles/npmrc
+relink .allowedsigners ~/.dotfiles/allowedsigners
 
 # ---- Homebrew ----
 
@@ -32,7 +36,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 chmod -R go-w "$(brew --prefix)/share"
 
 echo "installing brew apps"
-brew install git vim lynx wget ack hub tree highlight zsh-autosuggestions zsh-syntax-highlighting
+brew install git gh gpg vim wget ack tree highlight zsh-autosuggestions zsh-syntax-highlighting
 
 # Install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -49,16 +53,14 @@ echo "restart terminal to configure p10k"
 
 # ---- GPG ----
 
-echo "Remember to generate your gpg key:
-
-# https://gist.github.com/leobalter/649a1289deb57a8a7a8e0fbcefc55128
-# 1. Visit https://help.github.com/articles/generating-a-new-gpg-key/
-# 2. git config --global user.signingkey YOUR-SIGNING-KEY-PUB-ID"
-
 mkdir -p ~/.gnupg
 cd ~/.gnupg
 relink gpg.conf ~/.dotfiles/gpgconf
 relink gpg-agent.conf ~/.dotfiles/gpgagentconf
+
+chown -R $(whoami) ~/.gnupg/
+chmod 600 ~/.gnupg/*
+chmod 700 ~/.gnupg
 
 # ---- Volta ----
 
