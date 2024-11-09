@@ -1,7 +1,7 @@
 [user]
-	name = Leo Balter
-	email = 301201+leobalter@users.noreply.github.com
-	signingkey = ~/.ssh/id_ed25519.pub
+  name = Leo Balter
+  email = 301201+leobalter@users.noreply.github.com
+  signingkey = ~/.ssh/id_ed25519.pub
 
 [color]
   ui = auto
@@ -32,7 +32,7 @@
   followTags = true
 
 [core]
-	excludesfile = ~/.gitignore
+  excludesfile = ~/.gitignore
   editor = vim
   ignorecase = true
 
@@ -48,21 +48,21 @@
   required = true
 
 [rebase]
-	autoSquash = true
+  autoSquash = true
 [help]
-	autocorrect = 1
+  autocorrect = 1
 [diff]
-	renameLimit = 4096
+  renameLimit = 4096
 [pull]
-	ff = only
+  ff = only
 [init]
-	defaultBranch = main
+  defaultBranch = main
 [commit]
-	gpgsign = true
+  gpgsign = true
 [gpg]
-	program = /opt/homebrew/bin/gpg
-	format = ssh
+  program = /opt/homebrew/bin/gpg
+  format = ssh
 [tag]
-	gpgSign = true
+  gpgSign = true
 [gpg "ssh"]
-	allowedSignersFile = ~/.allowedsigners
+  allowedSignersFile = ~/.allowedsigners
