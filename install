@@ -1,19 +1,19 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+set -e
 
 function relink() {
   if [[ -h "$1" ]]; then
     echo "Relinking $1"
-    # Symbolic link? Then recreate.
     rm "$1"
-    ln -sn "$2" "$1"
+    ln -snf "$2" "$1"
   elif [[ -e "$1" ]]; then
     echo "Backing up $1"
-    mv "$1" "$1.old"
-  elif [[ ! -e "$1" ]]; then
-    echo "Linking $1"
-    ln -sn "$2" "$1"
+    mv -n "$1" "$1.old"
+    ln -snf "$2" "$1"
   else
-    echo "$1 exists as a real file, skipping."
+    echo "Linking $1"
+    ln -snf "$2" "$1"
   fi
 }
 
@@ -30,26 +30,32 @@ relink .allowedsigners ~/.dotfiles/allowedsigners
 
 # ---- Homebrew ----
 
-# all echos start with a special unicode character to indicate steps using a character that reminds a step, not a beer mug
-
 echo "☕ Installing Homebrew"
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-eval "$(/opt/homebrew/bin/brew shellenv)"
-chmod -R go-w "$(brew --prefix)/share"
+if ! command -v brew &> /dev/null; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+  chmod -R go-w "$(brew --prefix)/share"
+else
+  echo "Homebrew already installed"
+fi
 
 echo "☕ Installing brew apps"
 brew install git gh gpg vim wget ack tree highlight zsh-autosuggestions zsh-syntax-highlighting
 
 # Install oh-my-zsh
 echo "☕ Installing oh-my-zsh"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+else
+  echo "oh-my-zsh already installed"
+fi
 
 relink .bash_profile ~/.dotfiles/bash_profile
 relink .bashrc ~/.dotfiles/bashrc
 relink .zshrc ~/.dotfiles/zshrc
 source ~/.zshrc
 
-# Download and install fonts MesloLGS NF Regular.ttf, MesloLGS NF Bold.ttf, MesloLGS NF Italic.ttf, MesloLGS NF Bold Italic.ttf
+# Download and install fonts
 echo "☕ Installing fonts from: https://github.com/romkatv/powerlevel10k#get-started"
 curl -fLo "$HOME/Library/Fonts/MesloLGS NF Regular.ttf" https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
 curl -fLo "$HOME/Library/Fonts/MesloLGS NF Bold.ttf" https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf
@@ -57,7 +63,11 @@ curl -fLo "$HOME/Library/Fonts/MesloLGS NF Italic.ttf" https://github.com/romkat
 curl -fLo "$HOME/Library/Fonts/MesloLGS NF Bold Italic.ttf" https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
 
 echo "☕ Installing powerlevel theme, p10k"
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ]; then
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+else
+  echo "powerlevel10k already installed"
+fi
 echo "☕ restart terminal to configure the p10k theme"
 
 # ---- GPG ----
@@ -67,7 +77,6 @@ cd ~/.gnupg
 relink gpg.conf ~/.dotfiles/gpgconf
 relink gpg-agent.conf ~/.dotfiles/gpgagentconf
 
-# Fix the "gpg: WARNING: unsafe permissions on homedir '/home/path/to/user/.gnupg'"
 chown -R $(whoami) ~/.gnupg/
 chmod 600 ~/.gnupg/*
 chmod 700 ~/.gnupg
@@ -75,16 +84,20 @@ chmod 700 ~/.gnupg
 # ---- Volta ----
 
 echo "☕ Installing Volta"
-curl https://get.volta.sh | bash
-volta install node
+if ! command -v volta &> /dev/null; then
+  curl https://get.volta.sh | bash
+  volta install node
+else
+  echo "Volta already installed"
+fi
 
-# get email from git config
+# --- SSH ---
+
+echo "☕ Setting up SSH"
 GIT_EMAIL=$(git config user.email)
 
-# log into github with the github cli
 gh auth login --hostname github.com
 
-# if the login does not generate a ssh token, generate one manually
 if [ ! -f ~/.ssh/id_ed25519 ]; then
   echo "☕ No ssh key found, generating one"
   ssh-keygen -t ed25519 -C "$GIT_EMAIL"
@@ -94,34 +107,26 @@ eval "$(ssh-agent -s)"
 echo "☕ Adding ssh key to ssh-agent"
 ssh-add -K ~/.ssh/id_ed25519
 
-# generate allowedsigners file for ssh with contents from the public key: email, keytype, key
-# this is gonna be used for ssh certificate signing
 echo "$GIT_EMAIL $(cat ~/.ssh/id_ed25519.pub | cut -d ' ' -f 2)" > ~/.dotfiles/allowedsigners
 
-# populate the ssh config file with the github host
 echo "Host github.com
   AddKeysToAgent yes
   UseKeychain yes
   IdentityFile ~/.ssh/id_ed25519" > ~/.ssh/config
 
-# refresh gh login with ssh key
 echo "☕ Refreshing GitHub login with ssh key"
 gh auth refresh --hostname github.com --with-token < ~/.ssh/id_ed25519
 
-# add the public key to the github account using the github cli
 echo "☕ Adding ssh key to GitHub account"
 gh ssh-key add ~/.ssh/id_ed25519.pub --title "dotfiles"
 
 # ---- VIM ----
 echo "☕ Setting vim plugins"
 
-# installs pathogen
 mkdir -p ~/.vim ~/.vim/autoload ~/.vim/bundle ~/.vim/colors && \
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
-# installs pathogen vim bundles
 cd ~/.vim/bundle
-# Refs: http://vimawesome.com
 git clone https://github.com/pangloss/vim-javascript.git
 git clone git://github.com/airblade/vim-gitgutter.git
 git clone https://github.com/scrooloose/nerdtree.git

@@ -55,6 +55,7 @@
   renameLimit = 4096
 [pull]
   ff = only
+  rebase = true
 [init]
   defaultBranch = main
 [commit]
@@ -66,3 +67,7 @@
   gpgSign = true
 [gpg "ssh"]
   allowedSignersFile = ~/.allowedsigners
+[merge]
+  ff = false
+[fetch]
+  prune = true
