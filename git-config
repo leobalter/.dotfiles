@@ -1,6 +1,7 @@
 [user]
 	name = Leo Balter
 	email = 301201+leobalter@users.noreply.github.com
+	signingkey = /Users/leobalter/.ssh/id_ed25519.pub
 
 [color]
   ui = auto
@@ -60,5 +61,8 @@
 	gpgsign = true
 [gpg]
 	program = /opt/homebrew/bin/gpg
+	format = ssh
 [tag]
 	gpgSign = true
+[gpg "ssh"]
+	allowedSignersFile = /Users/leobalter/.config/git/allowed_signers

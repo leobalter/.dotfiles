@@ -81,32 +81,6 @@ plugins=(macos git gh web-search npm volta)
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
 # Mono from Homebrew
 export MONO_GAC_PREFIX="/usr/local"
 
@@ -125,8 +99,7 @@ export COPYFILE_DISABLE=true
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Forward git agent
-# ssh-add $HOME/.ssh/id_rsa
-ssh-add $HOME/.ssh/id_ed25519 &>/dev/null
+ssh-add --apple-use-keychain $HOME/.ssh/id_ed25519 &>/dev/null
 
 ## Aliases
 alias cls='clear'
@@ -189,4 +162,4 @@ export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
 export GPG_TTY=$(tty)
-gpgconf --launch gpg-agent
+# gpgconf --launch gpg-agent
