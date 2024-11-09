@@ -30,15 +30,18 @@ relink .allowedsigners ~/.dotfiles/allowedsigners
 
 # ---- Homebrew ----
 
-echo "Installing Homebrew"
+# all echos start with a special unicode character to indicate steps using a character that reminds a step, not a beer mug
+
+echo "☕ Installing Homebrew"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 eval "$(/opt/homebrew/bin/brew shellenv)"
 chmod -R go-w "$(brew --prefix)/share"
 
-echo "installing brew apps"
+echo "☕ Installing brew apps"
 brew install git gh gpg vim wget ack tree highlight zsh-autosuggestions zsh-syntax-highlighting
 
 # Install oh-my-zsh
+echo "☕ Installing oh-my-zsh"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 relink .bash_profile ~/.dotfiles/bash_profile
@@ -46,10 +49,16 @@ relink .bashrc ~/.dotfiles/bashrc
 relink .zshrc ~/.dotfiles/zshrc
 source ~/.zshrc
 
-# powerlevel theme
-# install font: https://github.com/romkatv/powerlevel10k#get-started
+# Download and install fonts MesloLGS NF Regular.ttf, MesloLGS NF Bold.ttf, MesloLGS NF Italic.ttf, MesloLGS NF Bold Italic.ttf
+echo "☕ Installing fonts from: https://github.com/romkatv/powerlevel10k#get-started"
+curl -fLo "$HOME/Library/Fonts/MesloLGS NF Regular.ttf" https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
+curl -fLo "$HOME/Library/Fonts/MesloLGS NF Bold.ttf" https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf
+curl -fLo "$HOME/Library/Fonts/MesloLGS NF Italic.ttf" https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf
+curl -fLo "$HOME/Library/Fonts/MesloLGS NF Bold Italic.ttf" https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
+
+echo "☕ Installing powerlevel theme, p10k"
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-echo "restart terminal to configure p10k"
+echo "☕ restart terminal to configure the p10k theme"
 
 # ---- GPG ----
 
@@ -58,17 +67,53 @@ cd ~/.gnupg
 relink gpg.conf ~/.dotfiles/gpgconf
 relink gpg-agent.conf ~/.dotfiles/gpgagentconf
 
+# Fix the "gpg: WARNING: unsafe permissions on homedir '/home/path/to/user/.gnupg'"
 chown -R $(whoami) ~/.gnupg/
 chmod 600 ~/.gnupg/*
 chmod 700 ~/.gnupg
 
 # ---- Volta ----
 
+echo "☕ Installing Volta"
 curl https://get.volta.sh | bash
 volta install node
 
+# get email from git config
+GIT_EMAIL=$(git config user.email)
+
+# log into github with the github cli
+gh auth login --hostname github.com
+
+# if the login does not generate a ssh token, generate one manually
+if [ ! -f ~/.ssh/id_ed25519 ]; then
+  echo "☕ No ssh key found, generating one"
+  ssh-keygen -t ed25519 -C "$GIT_EMAIL"
+fi
+echo "☕ Starting ssh-agent"
+eval "$(ssh-agent -s)"
+echo "☕ Adding ssh key to ssh-agent"
+ssh-add -K ~/.ssh/id_ed25519
+
+# generate allowedsigners file for ssh with contents from the public key: email, keytype, key
+# this is gonna be used for ssh certificate signing
+echo "$GIT_EMAIL $(cat ~/.ssh/id_ed25519.pub | cut -d ' ' -f 2)" > ~/.dotfiles/allowedsigners
+
+# populate the ssh config file with the github host
+echo "Host github.com
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_ed25519" > ~/.ssh/config
+
+# refresh gh login with ssh key
+echo "☕ Refreshing GitHub login with ssh key"
+gh auth refresh --hostname github.com --with-token < ~/.ssh/id_ed25519
+
+# add the public key to the github account using the github cli
+echo "☕ Adding ssh key to GitHub account"
+gh ssh-key add ~/.ssh/id_ed25519.pub --title "dotfiles"
+
 # ---- VIM ----
-echo "--- Setting vim plugins ---"
+echo "☕ Setting vim plugins"
 
 # installs pathogen
 mkdir -p ~/.vim ~/.vim/autoload ~/.vim/bundle ~/.vim/colors && \
@@ -89,6 +134,6 @@ curl -LSso $HOME/.vim/colors/lucario.vim https://raw.githubusercontent.com/rapha
 
 relink $HOME/.vim/colors/monokai.vim $HOME/.dotfiles/vim-colors/monokai.vim
 
-echo "--- Done! ---"
+echo "☕ ☕ ☕ Done! ☕ ☕ ☕"
 
 cd $HOME
