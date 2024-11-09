@@ -22,7 +22,6 @@ echo "--- Linking files ---"
 cd ~
 relink .gitconfig ~/.dotfiles/git-config
 relink .gitignore ~/.dotfiles/git-ignore-global
-relink .hgrc ~/.dotfiles/hgrc
 relink bin ~/.dotfiles/bin
 relink .vimrc ~/.dotfiles/vimrc
 relink .npmrc ~/.dotfiles/npmrc

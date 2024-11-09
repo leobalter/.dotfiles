@@ -1,3 +1,0 @@
-# Copy this file to ~/.browserstack_key and change the username and key
-export BROWSERSTACK_USERNAME='<YOUR USERNAME>'
-export BROWSERSTACK_KEY='<YOUR KEY HERE>'
