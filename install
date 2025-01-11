@@ -25,7 +25,6 @@ relink .gitignore ~/.dotfiles/git-ignore-global
 relink bin ~/.dotfiles/bin
 relink .vimrc ~/.dotfiles/vimrc
 relink .npmrc ~/.dotfiles/npmrc
-relink .allowedsigners ~/.dotfiles/allowedsigners
 
 # ---- Homebrew ----
 
@@ -105,6 +104,7 @@ echo "☕ Adding ssh key to ssh-agent"
 ssh-add --apple-use-keychain ~/.ssh/id_ed25519
 
 echo "$GIT_EMAIL $(cat ~/.ssh/id_ed25519.pub | cut -d ' ' -f 2)" > ~/.dotfiles/allowedsigners
+relink .allowedsigners ~/.dotfiles/allowedsigners
 
 echo "Host github.com
   AddKeysToAgent yes

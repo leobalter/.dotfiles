@@ -10,3 +10,5 @@ bin/virtualenv.py
 # This file is in the repo, but we don't
 # want to see changes to it.
 .dotfiles.tmproj
+
+allowedsigners
