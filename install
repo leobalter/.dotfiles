@@ -95,8 +95,6 @@ fi
 echo "☕ Setting up SSH"
 GIT_EMAIL=$(git config user.email)
 
-gh auth login --hostname github.com
-
 if [ ! -f ~/.ssh/id_ed25519 ]; then
   echo "☕ No ssh key found, generating one"
   ssh-keygen -t ed25519 -C "$GIT_EMAIL"
@@ -104,7 +102,7 @@ fi
 echo "☕ Starting ssh-agent"
 eval "$(ssh-agent -s)"
 echo "☕ Adding ssh key to ssh-agent"
-ssh-add -K ~/.ssh/id_ed25519
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519
 
 echo "$GIT_EMAIL $(cat ~/.ssh/id_ed25519.pub | cut -d ' ' -f 2)" > ~/.dotfiles/allowedsigners
 
@@ -113,27 +111,30 @@ echo "Host github.com
   UseKeychain yes
   IdentityFile ~/.ssh/id_ed25519" > ~/.ssh/config
 
-echo "☕ Refreshing GitHub login with ssh key"
-gh auth refresh --hostname github.com --with-token < ~/.ssh/id_ed25519
+gh auth login --hostname github.com
 
 echo "☕ Adding ssh key to GitHub account"
 gh ssh-key add ~/.ssh/id_ed25519.pub --title "dotfiles"
 
+echo "☕ Refreshing GitHub login with ssh key"
+GH_TOKEN=$(cat ~/.ssh/id_ed25519)
+gh auth refresh --hostname github.com
+
 # ---- VIM ----
 echo "☕ Setting vim plugins"
 
-mkdir -p ~/.vim ~/.vim/autoload ~/.vim/bundle ~/.vim/colors && \
-curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+# mkdir -p ~/.vim ~/.vim/autoload ~/.vim/bundle ~/.vim/colors && \
+# curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
 cd ~/.vim/bundle
 git clone https://github.com/pangloss/vim-javascript.git
-git clone git://github.com/airblade/vim-gitgutter.git
+git clone https://github.com/airblade/vim-gitgutter.git
 git clone https://github.com/scrooloose/nerdtree.git
-git clone git://github.com/ntpeters/vim-better-whitespace.git
-git clone https://github.com/bling/vim-airline ~/.vim/bundle/vim-airline
+git clone https://github.com/ntpeters/vim-better-whitespace.git
+git clone https://github.com/bling/vim-airline
 git clone https://github.com/editorconfig/editorconfig-vim
-mkdir  $HOME/.vim/colors/
 
+mkdir  $HOME/.vim/colors/
 curl -LSso $HOME/.vim/colors/lucario.vim https://raw.githubusercontent.com/raphamorim/lucario/master/colors/lucario.vim
 
 relink $HOME/.vim/colors/monokai.vim $HOME/.dotfiles/vim-colors/monokai.vim
